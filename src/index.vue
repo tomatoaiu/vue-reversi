@@ -1,15 +1,17 @@
 <template>
   <main>
-    <button @click="init()">init</button>
-    <ul  v-for="(row, i) of board" :key="i">
-      <li v-for="(column, j) of board[i]" :key="j" @click="clickedBoard($event, i, j)">
-        <div v-if="column === 0" class="blank"></div>
-        <div v-else-if="column === 1" class="black"></div>
-        <div v-else-if="column === 2" class="white"></div>
-      </li>
-    </ul>
-    <p v-if="turn === 1">black turn</p>
-    <p v-else>white turn</p>
+    <section>
+      <button @click="init()">init</button>
+      <ul  v-for="(row, i) of board" :key="i">
+        <li v-for="(column, j) of board[i]" :key="j" @click="clickedBoard($event, i, j)">
+          <div v-if="column === 0" class="blank"></div>
+          <div v-else-if="column === 1" class="black"></div>
+          <div v-else-if="column === 2" class="white"></div>
+        </li>
+      </ul>
+      <p v-if="turn === 1">black turn</p>
+      <p v-else>white turn</p>
+    </section>
   </main>
 </template>
 
@@ -62,9 +64,26 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+main {
+  width: 100vw;
+  height: 100vh;
+  display: table;
+}
+
+section {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+button {
+  padding: 0.2rem 0.5rem;
+}
+
 ul {
   height: 20px;
   width: 160px;
+  margin: auto;
 }
 
 li {
