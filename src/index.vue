@@ -1,6 +1,7 @@
 <template>
   <main>
     <section>
+      black: {{ count.black }}  white: {{ count.white }}
       <button @click="init()">init</button>
       <ul  v-for="(row, i) of board" :key="i">
         <li v-for="(column, j) of board[i]" :key="j" @click="clickedBoard($event, i, j)">
@@ -27,7 +28,11 @@ export default Vue.extend({
   data () {
     return {
       board: [],
-      turn: 1 // 1: black, 2: white
+      turn: 1, // 1: black, 2: white,
+      count: {
+        black: 2,
+        white: 2
+      }
     }
   },
   created () {
@@ -57,7 +62,16 @@ export default Vue.extend({
         }
         this.board[i][j] = this.turn
         this.turn = this.turn === BLACK ? WHITE : BLACK
+        this.countPiece()
       }
+    },
+    countPiece ():void {
+      this.count.black = 0
+      this.count.white = 0
+      this.board.forEach((row) => {
+        this.count.black += (row.filter((column) => column === 1)).length
+        this.count.white += (row.filter((column) => column === 2)).length
+      });
     }
   }
 })
