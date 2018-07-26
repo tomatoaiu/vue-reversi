@@ -81,23 +81,23 @@ button {
 }
 
 ul {
-  height: 20px;
-  width: 160px;
+  height: 50px;
+  width: 400px;
   margin: auto;
 }
 
 li {
   list-style: none;
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
   background-color: green;
 }
 
 .blank, .black, .white {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .black {
