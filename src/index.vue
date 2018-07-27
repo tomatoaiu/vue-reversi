@@ -51,6 +51,9 @@ export default Vue.extend({
       this.board[3][4] = WHITE
       this.board[4][3] = WHITE
       this.board[4][4] = BLACK
+
+      this.count.black = 2
+      this.count.white = 2
     },
     clickedBoard (event: Event, i: number, j: number): void {
       if (this.board[i][j] === BLANK) {
