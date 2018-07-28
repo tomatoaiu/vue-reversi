@@ -52,6 +52,8 @@ export default Vue.extend({
 
       this.count.black = 2
       this.count.white = 2
+
+      this.turn = BLACK
     },
     clickedBoard (i: number, j: number): void {
       if (this.board[i][j] === BLANK) {
