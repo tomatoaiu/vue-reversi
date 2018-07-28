@@ -8,7 +8,7 @@
           <div :class="column"></div>
         </li>
       </ul>
-      <p v-if="turn === 1">black turn</p>
+      <p v-if="turn === 'black'">black turn</p>
       <p v-else>white turn</p>
     </section>
   </main>
