@@ -4,10 +4,8 @@
       black: {{ count.black }}  white: {{ count.white }}
       <button @click="init()">init</button>
       <ul  v-for="(row, i) of board" :key="i">
-        <li v-for="(column, j) of board[i]" :key="j" @click="clickedBoard($event, i, j)">
-          <div v-if="column === 0" class="blank"></div>
-          <div v-else-if="column === 1" class="black"></div>
-          <div v-else-if="column === 2" class="white"></div>
+        <li v-for="(column, j) of board[i]" :key="j" @click="clickedBoard(i, j)">
+          <div :class="column"></div>
         </li>
       </ul>
       <p v-if="turn === 1">black turn</p>
@@ -19,16 +17,16 @@
 <script lang="ts">
 import Vue from 'vue'
 
-const BLANK = 0
-const BLACK = 1
-const WHITE = 2
+const BLANK = 'blank'
+const BLACK = 'black'
+const WHITE = 'white'
 
 export default Vue.extend({
   name: 'App',
   data () {
     return {
       board: [],
-      turn: 1, // 1: black, 2: white,
+      turn: BLACK,
       count: {
         black: 2,
         white: 2
@@ -55,15 +53,13 @@ export default Vue.extend({
       this.count.black = 2
       this.count.white = 2
     },
-    clickedBoard (event: Event, i: number, j: number): void {
+    clickedBoard (i: number, j: number): void {
       if (this.board[i][j] === BLANK) {
-        (<HTMLElement>event.target).classList.remove('blank')
         if (this.turn === BLACK) {
-          (<HTMLElement>event.target).classList.add('black')
+          this.board[i][j] = BLACK
         } else {
-          (<HTMLElement>event.target).classList.add('white')
+          this.board[i][j] = WHITE
         }
-        this.board[i][j] = this.turn
         this.turn = this.turn === BLACK ? WHITE : BLACK
         this.countPiece()
       }
@@ -72,8 +68,8 @@ export default Vue.extend({
       this.count.black = 0
       this.count.white = 0
       this.board.forEach((row) => {
-        this.count.black += (row.filter((column) => column === 1)).length
-        this.count.white += (row.filter((column) => column === 2)).length
+        this.count.black += (row.filter((column) => column === BLACK)).length
+        this.count.white += (row.filter((column) => column === WHITE)).length
       });
     }
   }
